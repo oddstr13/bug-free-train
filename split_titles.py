@@ -7,12 +7,10 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 DVDs = [
-    #    "Countdown To Christmas",
-    "Blaafjelld1",
+    # "Blaafjelld1",
+    # "Blaafjelld2",
+    "Blaafjelld3",
 ]
-
-# This command freezes at the end of Episode 1 in Blaafjelld1
-# ffmpeg -probesize 9G -analyzeduration 300M -fflags +genpts -i ts_01.vob -map 0 -map -0:d -c copy merged.mkv
 
 for dvd in DVDs:
     path = os.path.join("output", dvd)
@@ -29,5 +27,10 @@ for dvd in DVDs:
     split = dvd_utils.split_tracks(video_ts, merged, path)
 
     print(split)
+
+    for (title_set, track_id), vob_file in split.items():
+        mkv_file = dvd_utils.vob2mkv(vob_file)
+        # Deinterlace works differently with CLI than the GUI? (same presets)
+        # encoded = dvd_utils.encode(mkv_file, "presets/h264-2160p60.json")
 
     break

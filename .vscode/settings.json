@@ -2,6 +2,6 @@
 	"python.formatting.provider": "black",
 	"editor.formatOnSave": true,
 	"python.formatting.blackArgs": [
-		"--line-length=160"
+		"--line-length=120"
 	]
 }
